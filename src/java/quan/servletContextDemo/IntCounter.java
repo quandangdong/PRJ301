@@ -46,6 +46,9 @@ public class IntCounter extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         } finally {
+            // hihihihi
+            ///hahahahha
+            
             out.close();
         }
     }
