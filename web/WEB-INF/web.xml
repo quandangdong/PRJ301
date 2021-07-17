@@ -1,27 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+<web-app version="3.1" 
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <context-param>
         <param-name>initial</param-name>
-        <param-value>100</param-value>
+        <param-value>100</param-value> <!-- for servlet context -->
     </context-param>
     <context-param>
         <param-name>initial</param-name>
-        <param-value>300</param-value>
-    </context-param>
-    <servlet>
+        <param-value>300</param-value> <!-- for testing duplicate servlet context param -->
+    </context-param>                   <!-- if duplicate, takes the lasted param -->
+    
+    
+<!--    <servlet>
         <servlet-name>IntCounter</servlet-name>
         <servlet-class>quan.servletContextDemo.IntCounter</servlet-class>
+    </servlet>-->
+    
+    
+    <servlet>
+        <servlet-name>IntConfigCounter</servlet-name>
+        <servlet-class>quan.servletContextDemo.IntConfigCounter</servlet-class>
+        <init-param>                                <!-- for testing servlet config -->
+            <description>init parameter</description>
+            <param-name>initial</param-name>
+            <param-value>5</param-value> <!-- if duplicate, takes the first param -->
+        </init-param>
+        <init-param>                                <!-- for testing servlet config -->
+            <description>init parameter</description>
+            <param-name>initial</param-name>
+            <param-value>100</param-value> <!-- if duplicate, takes the first param -->
+        </init-param>
     </servlet>
-    <servlet-mapping>
+    
+    
+<!--    <servlet-mapping>
         <servlet-name>IntCounter</servlet-name>
         <url-pattern>/IntCounter</url-pattern>
+    </servlet-mapping>-->
+    
+    
+    <servlet-mapping>
+        <servlet-name>IntConfigCounter</servlet-name>
+        <url-pattern>/IntConfigCounter</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <!-- to test case, change the file name in <welcome-file> -->
     <welcome-file-list>
-        <welcome-file>IntCounter</welcome-file>
+        <welcome-file>IntConfigCounter</welcome-file>
     </welcome-file-list>
 </web-app>

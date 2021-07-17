@@ -7,7 +7,7 @@ package quan.servletContextDemo;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletContext;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +17,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class IntCounter extends HttpServlet {
+public class IntConfigCounter extends HttpServlet {
 
     private int count;
 
     public void init() throws ServletException {
+
         super.init();
 
-        ServletContext sc = getServletContext();
+        ServletConfig sc = getServletConfig();
         String tmp = sc.getInitParameter("initial");
 
         try {
@@ -40,15 +41,12 @@ public class IntCounter extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             out.println("<body>");
-            out.println("<h1>The ServletContext-Init Demo</h1>");
+            out.println("<h1>The ServletConfig-Init Demo</h1>");
             count++;
-            out.println("The web is accessed in " + count + " times");
+            out.println("The web is accessed in " + count + "times");
             out.println("</body>");
             out.println("</html>");
         } finally {
-            // hihihihi
-            ///hahahahha
-            
             out.close();
         }
     }
